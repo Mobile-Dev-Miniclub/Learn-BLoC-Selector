@@ -24,13 +24,12 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: BlocBuilder<UserBloc, UserState>(
-          builder: (context, state) {
-            print("refresh title");
-            return Text("Welcome ${state.user.name}");
-          },
-        ),
-      ),
+          title: BlocSelector<UserBloc, UserState, String>(
+              selector: (state) => state.user.name,
+              builder: (context, name) {
+                print("refresh title");
+                return Text("Welcome $name");
+              })),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
